@@ -2,8 +2,18 @@
 const title = document.querySelector('title');
 const body = document.querySelector('body');
 const weekDays = ['Dom','Seg', 'Ter','Qua', 'Qui', 'Sex', 'Sab'];
+const months = [
+    'Janeiro','Fevereiro','Março', 'Abril', 'Maio', 'Junho',
+    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+];
 var table;
-
+var dateTime = new Date();
+dateTime.setDate(1);
+dateTime.setMonth(1);
+var day = dateTime.getDate();
+var month = dateTime.getMonth();
+var year = dateTime.getFullYear();
+var wday = dateTime.getDay();
 
 //funções
 function setTitle(txt) {
@@ -30,7 +40,7 @@ function renderMonthName(){
     const td = document.createElement('td');
     td.setAttribute('colspan',7);
     tr.appendChild(td);
-    td.innerText = "Janeiro";
+    td.innerText = `${months[month]} ${year}`;
     return tr;
 }
 
@@ -47,19 +57,50 @@ function renderBody(){
     const tbody = document.createElement('tbody');
 
     let tr = document.createElement('tr');
-    for(let x=1; x <= 31; x++){
+    const startDay = wday;
+    var nDay = 1;
+    var x = 1;
+    while(nDay <= getLastDay(dateTime)){
         const td = document.createElement('td');
-        td.innerText = x;
+        if (x <= startDay){
+            td.innerText = '';
+        } else {
+            td.innerText = nDay;
+            nDay++;
+        }
         tr.appendChild(td);
         if (x % 7 === 0){
             tbody.appendChild(tr);
             tr = document.createElement('tr');
         }
+        x++;
     }
     
+    const cols = 6 - getLastWeekDay(dateTime);
+    for (let x=0; x < cols;x++){
+        const td = document.createElement('td');
+        td.innerText = '';
+        tr.appendChild(td);
+    }
 
     tbody.appendChild(tr);
     table.appendChild(tbody);
+}
+
+function lastDateOfMonth(date){
+    var copyDate = new Date(date);
+    copyDate.setMonth(date.getMonth()+1);
+    copyDate.setDate(1);
+    copyDate.setDate(copyDate.getDate()-1);
+    return copyDate;
+}
+
+function getLastDay(date){
+    return lastDateOfMonth(date).getDate();
+}
+
+function getLastWeekDay(date){
+    return lastDateOfMonth(date).getDay();
 }
 
 function renderCalendar(){
