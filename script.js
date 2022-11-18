@@ -9,7 +9,6 @@ const months = [
 var table;
 var dateTime = new Date();
 dateTime.setDate(1);
-dateTime.setMonth(1);
 var day = dateTime.getDate();
 var month = dateTime.getMonth();
 var year = dateTime.getFullYear();
@@ -22,11 +21,14 @@ function setTitle(txt) {
 
 function initTable() {
     table = document.createElement('table');
-    table.setAttribute('border',1);
+    table.setAttribute('border',0);
+    table.setAttribute('cellspacing',0);
+    table.setAttribute('cellpadding',0);
 }
 
 function renderWeekDays(){
     const tr = document.createElement('tr');
+    tr.setAttribute('class','weekdays');
     for (const day of weekDays){
         const td = document.createElement('td');
         td.innerText = day;

@@ -1,0 +1,37 @@
+body{
+    margin: 0;
+    background-color: #160741;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+    width: auto;
+    margin: 30px auto;
+    background-color: #593da7;
+    border-top: 1px solid #FFF9;
+    border-left: 1px solid #FFF9;
+}
+
+table thead td{
+    color: #ffbb00;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #FFF9;
+    border-right: 1px solid #FFF9;
+    min-width: 40px;
+}
+
+table thead tr.weekdays td{
+    background-color: #0005;
+    color: #FFF;
+}
+
+table tbody td{
+    background-color: #FFF5;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #FFF9;
+    border-right: 1px solid #FFF9;
+    color: #FFF;
+}
