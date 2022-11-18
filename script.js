@@ -19,7 +19,19 @@ function setTitle(txt) {
     title.innerText = txt;
 }
 
+function setDateVars(){
+    dateTime.setDate(1);
+    day = dateTime.getDate();
+    month = dateTime.getMonth();
+    year = dateTime.getFullYear();
+    wday = dateTime.getDay();
+}
+
 function initTable() {
+    const existTable = document.querySelector('table');
+    if (existTable){
+        existTable.remove();
+    }
     table = document.createElement('table');
     table.setAttribute('border',0);
     table.setAttribute('cellspacing',0);
@@ -37,11 +49,49 @@ function renderWeekDays(){
     return tr;
 }
 
+function prevMonth(){
+    dateTime.setMonth(dateTime.getMonth()-1);
+    setDateVars();
+    renderCalendar();
+}
+
+function nextMonth(){
+    dateTime.setMonth(dateTime.getMonth()+1);
+    setDateVars();
+    renderCalendar();
+}
+
+function buttonPrev(){
+    const button = document.createElement('button');
+    button.innerText = "<<";
+    button.addEventListener('click', prevMonth);
+    return button;
+}
+
+function buttonNext(){
+    const button = document.createElement('button');
+    button.innerText = ">>";
+    button.addEventListener('click', nextMonth);
+    return button;
+}
+
 function renderMonthName(){
     const tr = document.createElement('tr');
+
+    const tdLeft = document.createElement('td');
+    tdLeft.setAttribute('class','button');
+    tdLeft.appendChild(buttonPrev());
+
+    const tdRight = document.createElement('td');
+    tdRight.appendChild(buttonNext());
+    tdRight.setAttribute('class','button');
+
     const td = document.createElement('td');
-    td.setAttribute('colspan',7);
+    td.setAttribute('colspan',5);
+    
+    tr.appendChild(tdLeft);
     tr.appendChild(td);
+    tr.appendChild(tdRight);
     td.innerText = `${months[month]} ${year}`;
     return tr;
 }

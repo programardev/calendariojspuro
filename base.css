@@ -22,6 +22,19 @@ table thead td{
     min-width: 40px;
 }
 
+table thead td.button{
+    padding: 0;
+}
+
+table thead td button{
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 5px;
+    background-color: #0009;
+    border: 0;
+    color: #ffbb00;
+}
+
 table thead tr.weekdays td{
     background-color: #0005;
     color: #FFF;
